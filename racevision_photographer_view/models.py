@@ -3,6 +3,7 @@ from django.db import models
 class Runner(models.Model):
     
     place = models.IntegerField(max_length=4, unique = True)
+    n_jersey = models.IntegerField(max_length=4, unique = True)
     name = models.CharField(max_length = 100)
     n_licence = models.DateField(null = False)
     club = models.CharField(max_length = 100)
