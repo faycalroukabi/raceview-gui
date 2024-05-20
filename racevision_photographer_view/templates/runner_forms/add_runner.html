@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>form: affichage</title>
+</head>
+
+<body>
+    <form action="{%url 'validate_runner' %}" method="POST">
+        {% csrf_token %}
+        {{form}}
+            <input type="submit" value="Soumettre"/>
+    </form>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script>
+        function uploadFile() {
+            var data = new FormData();
+            data.append("file", $("input[id^='file']")[0].files[0]);
+            data.append("csrfmiddlewaretoken", "{{ csrf_token }}");
+            $.ajax({
+                method: "POST",
+                url: "/upload/",
+                processData: false,
+                contentType: false,
+                mimeType: "multipart/form-data",
+                data: data,
+                success: function(res) {
+                    console.log(res)
+                }
+            })
+        }
+    </script>
+</body>
